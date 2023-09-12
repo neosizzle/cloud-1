@@ -1,0 +1,29 @@
+# playbooks/bootstrap-db.yaml
+---
+- name: Bootstrap a database EC2 instance
+  hosts: database
+  become: True
+  
+  tasks:
+    - name: Install Git package
+      yum:
+        name: git
+        state: present
+
+    - name: Install Docker package
+      yum:
+        name: docker
+        state: present
+    
+    - name: Clone repo with build instructions
+      git:
+        repo: https://github.com/neosizzle/cloud-1.git
+        dest: /home/ec2-user
+        clone: yes
+        update: yes
+
+    - name: Read file from cloned repository
+      debug:
+        msg: "{{ lookup('file', '/home/ec2-user/cloud-1/.gitignore') }}"
+
+    

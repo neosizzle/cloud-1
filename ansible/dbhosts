@@ -1,0 +1,4 @@
+[database]
+dbserver ansible_host=ec2-52-64-169-82.ap-southeast-2.compute.amazonaws.com ansible_user=ec2-user ansible_private_key_file=../ssh/jng.pem
+
+[frontend]
