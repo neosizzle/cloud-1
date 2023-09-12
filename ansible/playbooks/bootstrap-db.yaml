@@ -45,12 +45,3 @@
       command: docker-compose up -d mysql
       args:
         chdir: /home/ec2-user/cloud-1/docker
-
-    # - name: Slurp hosts file
-    #   slurp:
-    #     src: /home/ec2-user/cloud-1/ansible/dbhosts
-    #   register: slurpfile
-
-    # - debug: msg="{{ slurpfile['content'] | b64decode }}"
-
-    
