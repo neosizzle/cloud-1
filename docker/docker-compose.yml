@@ -27,7 +27,7 @@ services:
     restart: always
 
   wordpress:
-    image: wordpress:latest-fpm
+    image: wordpress:php8.2-fpm
     volumes:
       - ./wordpress_data:/var/www/html # change this to EBS soon
     environment:
