@@ -26,8 +26,20 @@ services:
       - /sessions
     restart: always
 
+  # wordpress:
+  #   image: wordpress:php8.2-fpm
+  #   volumes:
+  #     - ./wordpress_data:/var/www/html # change this to EBS soon
+  #   environment:
+  #     WORDPRESS_DB_HOST: 172.31.0.82:3306 # Put the private ip address for the db instance here
+  #     WORDPRESS_DB_USER: wordpress
+  #     WORDPRESS_DB_PASSWORD: wordpresspassword
+  #     WORDPRESS_DB_NAME: wordpress
+  #     WORDPRESS_DEBUG: 1
+  #   restart: always
+
   wordpress:
-    image: wordpress:php8.2-fpm
+    image: wordpress:latest
     volumes:
       - ./wordpress_data:/var/www/html # change this to EBS soon
     environment:
