@@ -35,6 +35,7 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpresspassword
       WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_NAME: true
     restart: always
 
   webserver:
