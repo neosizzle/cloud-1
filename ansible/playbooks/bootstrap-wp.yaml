@@ -57,6 +57,6 @@
         chdir: /home/ec2-user/cloud-1/docker
 
     - name: Run docker-compose up on docker/docker-compose.yml
-      command: docker-compose up -d wordpress webserver
+      command: docker-compose up -d wordpress-test webserver --remove-orphans
       args:
         chdir: /home/ec2-user/cloud-1/docker
