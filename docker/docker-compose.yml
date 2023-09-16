@@ -41,7 +41,7 @@ services:
 
   webserver:
     depends_on:
-      - wordpress
+      - wordpress-test
     image: nginx:latest
     volumes:
       - ./wordpress_data:/var/www/html
