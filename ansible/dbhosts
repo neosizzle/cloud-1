@@ -3,3 +3,4 @@ dbserver ansible_host=ec2-3-25-82-73.ap-southeast-2.compute.amazonaws.com ansibl
 phpmyadmin ansible_host=ec2-user@ec2-3-27-157-78.ap-southeast-2.compute.amazonaws.com ansible_user=ec2-user ansible_private_key_file=../ssh/jng.pem
 
 [frontend]
+wp ansible_host=ec2-54-252-65-97.ap-southeast-2.compute.amazonaws.com ansible_user=ec2-user ansible_private_key_file=../ssh/jng.pem

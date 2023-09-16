@@ -1,0 +1,57 @@
+# playbooks/bootstrap-wp.yaml
+---
+- name: Bootstrap a wordpress EC2 instance
+  hosts: wp
+  become: True
+  
+  tasks:
+    - name: Install Git package
+      yum:
+        name: git
+        state: present
+
+    - name: Install Docker package
+      yum:
+        name: docker
+        state: present
+
+    - name: Run and enable docker
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Install or upgrade docker-compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+x'
+        force: yes
+      when: docker_compose_current_version is not defined or docker_compose_current_version is version(docker_compose_version, '<')
+
+    - name: Clone repo with build instructions
+      git:
+        repo: https://github.com/neosizzle/cloud-1.git
+        dest: /home/ec2-user/cloud-1
+        clone: yes
+        update: yes
+
+    - name: Creates wordpress_data directory
+      file:
+        path: /home/ec2-user/cloud-1/docker/wordpress_data
+        state: directory
+
+    - name: Creates ssl directory
+      file:
+        path: /home/ec2-user/cloud-1/docker/ssl
+        state: directory
+
+    - name: Run command to generate self signed cert
+      command: openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+      args:
+        chdir: /home/ec2-user/cloud-1/docker/ssl
+
+    - name: Run docker-compose up on docker/docker-compose.yml
+      command: docker-compose up -d wordpress webserver
+      args:
+        chdir: /home/ec2-user/cloud-1/docker

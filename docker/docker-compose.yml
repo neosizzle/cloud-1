@@ -5,9 +5,12 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql # change this to EBS soon
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD: password
+      - MYSQL_DATABASE: wordpress
+      - MYSQL_USER: wordpress
+      - MYSQL_PASSWORD: wordpresspassword
     ports:
-    - "3306:3306"
+    - 3306:3306
     restart: always
 
   phpmyadmin:
@@ -22,3 +25,25 @@ services:
     volumes:
       - /sessions
     restart: always
+
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - ./wordpress_data:/var/www/html # change this to EBS soon
+    environment:
+      WORDPRESS_DB_HOST: 172.31.0.82:3306 # Put the private ip address for the db instance here
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpresspassword
+      WORDPRESS_DB_NAME: wordpress
+
+  webserver:
+    depends_on:
+      - wordpress
+    image: nginx:latest
+    volumes:
+      - ./wordpress_data:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./ssl:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
