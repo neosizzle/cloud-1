@@ -26,7 +26,7 @@ services:
       - /sessions
     restart: always
 
-  wordpress-test:
+  wordpress:
     image: wordpress:latest
     volumes:
       - ./wordpress_data:/var/www/html # change this to EBS soon
@@ -39,7 +39,7 @@ services:
 
   webserver:
     depends_on:
-      - wordpress-test
+      - wordpress
     image: nginx:latest
     volumes:
       - ./wordpress_data:/var/www/html
