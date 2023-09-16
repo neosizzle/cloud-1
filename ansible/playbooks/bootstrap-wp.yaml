@@ -51,6 +51,11 @@
       args:
         chdir: /home/ec2-user/cloud-1/docker/ssl
 
+    - name: Run docker-compose down
+      command: docker-compose down
+      args:
+        chdir: /home/ec2-user/cloud-1/docker
+
     - name: Run docker-compose up on docker/docker-compose.yml
       command: docker-compose up -d wordpress webserver
       args:

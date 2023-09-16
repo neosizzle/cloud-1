@@ -36,6 +36,8 @@ services:
       WORDPRESS_DB_PASSWORD: wordpresspassword
       WORDPRESS_DB_NAME: wordpress
     restart: always
+    ports:
+      - 81:80
 
   webserver:
     depends_on:
