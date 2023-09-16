@@ -47,7 +47,7 @@
         state: directory
 
     - name: Run command to generate self signed cert
-      command: openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+      command: openssl req -x509 -nodes -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -subj "/C=MY/ST=Selangor/L=Kuala Lumpur"
       args:
         chdir: /home/ec2-user/cloud-1/docker/ssl
 
