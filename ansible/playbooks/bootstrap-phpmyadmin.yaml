@@ -1,7 +1,7 @@
-# playbooks/bootstrap-db.yaml
+# playbooks/bootstrap-phpmyadmin.yaml
 ---
-- name: Bootstrap a database EC2 instance
-  hosts: dbserver
+- name: Bootstrap a phpmyadmin EC2 instance
+  hosts: phpmyadmin
   become: True
   
   tasks:
@@ -36,12 +36,7 @@
         clone: yes
         update: yes
 
-    - name: Creates mysql data directory
-      file:
-        path: /home/ec2-user/cloud-1/docker/mysql_data
-        state: directory
-
     - name: Run docker-compose up on docker/docker-compose.yml
-      command: docker-compose up -d mysql
+      command: docker-compose up -d phpmyadmin
       args:
         chdir: /home/ec2-user/cloud-1/docker

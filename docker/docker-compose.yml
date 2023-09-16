@@ -9,3 +9,16 @@ services:
     ports:
     - "3306:3306"
     restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: 172.31.0.82 # Put the private ip address for the db instance here
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - 80:80
+    volumes:
+      - /sessions
+    restart: always
