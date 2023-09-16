@@ -26,7 +26,7 @@ services:
       - /sessions
     restart: always
 
-  wordpress:
+  wordpress-test:
     image: wordpress:latest
     volumes:
       - ./wordpress_data:/var/www/html # change this to EBS soon
@@ -44,7 +44,7 @@ services:
       - wordpress
     image: nginx:latest
     volumes:
-      # - ./wordpress_data:/var/www/html
+      - ./wordpress_data:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
       - ./ssl:/etc/nginx/ssl
     ports:
