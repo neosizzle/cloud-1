@@ -36,6 +36,8 @@ services:
       WORDPRESS_DB_PASSWORD: wordpresspassword
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DEBUG: 1
+       WORDPRESS_CONFIG_EXTRA: |
+        $_SERVER['HTTPS'] = 'on';
     restart: always
 
   webserver:
