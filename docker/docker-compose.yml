@@ -38,7 +38,6 @@ services:
       WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
         define('FORCE_SSL_ADMIN', true);
-        $${_SERVER}['HTTPS']='on';
     restart: always
 
   webserver:
